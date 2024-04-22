@@ -58,6 +58,9 @@ public class Yams {
         y.rollDices();
         y.displayDices();
         y.chooseDice();
+        //On teste ScoreSheet
+        ScoreSheet s = new ScoreSheet(3);
+        s.displayScoresheet();
     }
 }
 
@@ -67,19 +70,21 @@ class ScoreSheet {
 
     public ScoreSheet(int nb_joueurs) {
         //Constructeur d'un scoresheet contenant les résultats de tous les joueurs
-        for(int i = 0; i < nb_joueurs; i++){
-            this.scoresheet.add(new ArrayList<ArrayList<Integer>>());
-            for(int j = 1; j <= 14; j++){
-                this.scoresheet.get(i).add(new ArrayList<Integer>());
-                this.scoresheet.get(i).get(j).add(i);
-                this.scoresheet.get(i).get(j).add(null);
+        this.scoresheet = new ArrayList<ArrayList<ArrayList<Integer>>>();
+        for (int i = 0; i < nb_joueurs; i++) {
+            ArrayList<ArrayList<Integer>> temp = new ArrayList<>();
+            this.scoresheet.add(temp);
+            for (int j = 0; j <= 14; j++) {
+                this.scoresheet.get(i).add(new ArrayList<>());
             }
         }
     }
 
     public void displayScoresheet()  {
-        
+        //On affiche les scores de tous les joueurs
+        for(int i = 0; i < this.scoresheet.size(); i++) {
+            System.out.println("Joueur " + i + " : " + this.scoresheet.get(i));
+        }
     }
-
 }
 
