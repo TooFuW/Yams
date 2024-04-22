@@ -118,6 +118,7 @@ class Partie {
         Partie p = new Partie(2);
         while (true) { //True pour l'instant, mais on mettra une vérification de si la feuille de score est remplie à la palce
             for (int i = 0; i < p.scores.getScoreSheet().size(); i++) {
+                System.out.println("Au joueur " + i + " de jouer :");
                 //On lance une première fois les dés
                 p.partie.rollDices();
                 p.partie.displayDices();
