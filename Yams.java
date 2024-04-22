@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public class Yams {
+    //On initialise les variables
     private ArrayList<Integer> dices;
     private ArrayList<Integer> keepedDice;
 
@@ -60,9 +61,12 @@ public class Yams {
     }
 }
 
-class ScoreSheet{
+class ScoreSheet {
+    //On initialise les variables
     private ArrayList<ArrayList<ArrayList<Integer>>> scoresheet;
-    public ScoreSheet(int nb_joueurs){
+
+    public ScoreSheet(int nb_joueurs) {
+        //Constructeur d'un scoresheet contenant les résultats de tous les joueurs
         for(int i = 0; i < nb_joueurs; i++){
             this.scoresheet.add(new ArrayList<ArrayList<Integer>>());
             for(int j = 1; j <= 14; j++){
