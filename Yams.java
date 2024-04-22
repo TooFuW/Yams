@@ -32,7 +32,7 @@ public class Yams {
 
     public int chooseDice() {
         //On choisir les dés à garder
-        System.out.print("Entrez les numéros des dés à garder (séparés par des espaces) : ");
+        System.out.print("Entrez les numéros (emplacements) des dés à garder (séparés par des espaces) : ");
         String input = System.console().readLine();
         this.keepedDice = new ArrayList<Integer>();
         for (String s : input.split(" ")) {
@@ -44,6 +44,10 @@ public class Yams {
             }
         }
         return 1;
+    }
+
+    public void verificationCombos() {
+        //On cherche les combinaisons de score possibles par rapport aux dés actuels
     }
 
     public void displayDices() {
@@ -103,13 +107,36 @@ class Partie {
     ScoreSheet scores;
     Yams partie;
 
-    public Partie() {
+    public Partie(int nb_joueurs) {
         //Constructeur d'une partie de yams
-        this.scores = new ScoreSheet(2);
+        this.scores = new ScoreSheet(nb_joueurs);
         this.partie = new Yams();
     }
 
     public static void main(String[] args) {
         //On exécute la boucle du jeu
+        Partie p = new Partie(2);
+        while (true) { //True pour l'instant, mais on mettra une vérification de si la feuille de score est remplie à la palce
+            for (int i = 0; i < p.scores.getScoreSheet().size(); i++) {
+                //On lance une première fois les dés
+                p.partie.rollDices();
+                p.partie.displayDices();
+                //On sélectionne les dés pour le deuxième roll
+                while (p.partie.chooseDice() == 0) {
+                    p.partie.chooseDice();
+                }
+                p.partie.rollDices();
+                p.partie.displayDices();
+                //On sélectionne les dés pour le dernier roll
+                while (p.partie.chooseDice() == 0) {
+                    p.partie.chooseDice();
+                }
+                p.partie.rollDices();
+                p.partie.displayDices();
+                //On met le score au bon endroit
+                p.scores.setScoreSheet(i, 1, 5);//Valeurs placeholder
+                p.scores.displayScoresheet();
+            }
+        }
     }
 }
