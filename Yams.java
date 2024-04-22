@@ -43,7 +43,6 @@ public class Yams {
                 return 0;
             }
         }
-        System.out.println(this.keepedDice);
         return 1;
     }
 
@@ -75,7 +74,7 @@ class ScoreSheet {
         this.scoresheet = new ArrayList<ArrayList<ArrayList<Integer>>>();
         for (int i = 0; i < nb_joueurs; i++) {
             this.scoresheet.add(new ArrayList<>());
-            for (int j = 0; j <= 14; j++) {
+            for (int j = 0; j < 14; j++) {
                 this.scoresheet.get(i).add(new ArrayList<>());
             }
         }
@@ -87,7 +86,7 @@ class ScoreSheet {
     }
 
     public void setScoreSheet(int numJoueur, int numCategorie, int score) {
-        //On met un score au bon endroit dans le ScoreSheet
+        //On met un score au bon endroit dans le ScoreSheet (se référencer à binding.txt)
         this.scoresheet.get(numJoueur).get(numCategorie).add(score);
     }
 
@@ -96,5 +95,21 @@ class ScoreSheet {
         for(int i = 0; i < this.scoresheet.size(); i++) {
             System.out.println("Joueur " + i + " : " + this.scoresheet.get(i));
         }
+    }
+}
+
+class Partie {
+    //On initialise les variables
+    ScoreSheet scores;
+    Yams partie;
+
+    public Partie() {
+        //Constructeur d'une partie de yams
+        this.scores = new ScoreSheet(2);
+        this.partie = new Yams();
+    }
+
+    public static void main(String[] args) {
+        //On exécute la boucle du jeu
     }
 }
