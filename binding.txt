@@ -1,14 +1,14 @@
-as         1
-2           2
-3           3
-4           4
-5           5
-6           6
-Bonus       7
-brelan      8
-carre       9
-full        10
+as              1
+2               2
+3               3
+4               4
+5               5
+6               6
+Bonus           7
+brelan          8
+carre           9
+full            10
 petite suite    11
 grande suite    12
-yams        13
-chance      14
+yams            13
+chance          14
