@@ -126,19 +126,6 @@ public class Yams {
         //On affiche les dés
         System.out.println("Les dés sont : " + this.dices.get(0) + " - " + this.dices.get(1) + " - " + this.dices.get(2) + " - " + this.dices.get(3) + " - " + this.dices.get(4));
     }
-
-    public static void main(String[] args) {
-        //On exécute le jeu
-        Yams y = new Yams();
-        y.rollDices();
-        y.displayDices();
-        y.chooseDice();
-        //On teste ScoreSheet
-        ScoreSheet s = new ScoreSheet(3);
-        s.displayScoresheet();
-        s.setScoreSheet(0, 0, 1);
-        s.displayScoresheet();
-    }
 }
 
 class ScoreSheet {
@@ -164,13 +151,45 @@ class ScoreSheet {
         return this.scoresheet;
     }
 
-    public void setScoreSheet(int numJoueur, int numCategorie, int score) {
+    public void setScoreSheet(int numJoueur, ArrayList<ArrayList<Integer>> score) {
         //On met un score au bon endroit dans le ScoreSheet (se référencer à binding.txt)
-        this.scoresheet.get(numJoueur).get(numCategorie).add(score);
+        this.displayScoresheet();
+        System.out.println("\nEntrez le numéro de la catégorie dans laquelle vous voulez ajouter votre score :");
+        System.out.println("- As : 1");
+        System.out.println("- 2 : 2");
+        System.out.println("- 3 : 3");
+        System.out.println("- 4 : 4");
+        System.out.println("- 5 : 5");
+        System.out.println("- 6 : 6");
+        System.out.println("- Brelan : 7");
+        System.out.println("- Carre : 8");
+        System.out.println("- Full : 9");
+        System.out.println("- Petite suite : 10");
+        System.out.println("- Grande suite : 11");
+        System.out.println("- Yams : 12");
+        System.out.println("- Chance : 13");
+        int choixCategorie = 0;
+        while (choixCategorie == 1) {
+            try {
+                choixCategorie = Integer.parseInt(System.console().readLine());
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Entrez un nombre valide :");
+                this.setScoreSheet(numJoueur, score);
+            }
+        }
+        if (this.scoresheet.get(numJoueur).get(choixCategorie).get(1) == null) {
+            this.scoresheet.get(numJoueur).get(choixCategorie).add(score.get(choixCategorie).get(1));
+        }
+        else {
+            System.out.println("Vous avez déja un score pour cette catégorie, veuillez choisir une catégorie vide :");
+            this.setScoreSheet(numJoueur, score);
+        }
     }
 
     public void displayScoresheet()  {
         //On affiche les scores de tous les joueurs
+        System.out.println();
         for(int i = 0; i < this.scoresheet.size(); i++) {
             System.out.print("Joueur " + i + " : ");
             //On crée une copie de scoresheet
@@ -357,7 +376,7 @@ class Partie {
         Partie game = new Partie(2);
         while (true) { //True pour l'instant, mais on mettra une vérification de si la feuille de score est remplie à la place
             for (int i = 0; i < game.scores.getScoreSheet().size(); i++) {
-                System.out.println("Au joueur " + i + " de jouer :");
+                System.out.println("\nAu joueur " + i + " de jouer :");
                 //On lance une première fois les dés
                 game.partie.rollDices();
                 game.partie.displayDices();
@@ -381,33 +400,8 @@ class Partie {
                     game.partie.rollDices();
                 }
                 game.partie.displayDices();
-                //On met le score au bon endroit
-                System.out.println("Entrez le numéro de la catégorie dans laquelle vous voulez ajouter votre score :");
-                System.out.println("- As : 1");
-                System.out.println("- 2 : 2");
-                System.out.println("- 3 : 3");
-                System.out.println("- 4 : 4");
-                System.out.println("- 5 : 5");
-                System.out.println("- 6 : 6");
-                System.out.println("- Bonus : 7");
-                System.out.println("- Brelan : 8");
-                System.out.println("- Carre : 9");
-                System.out.println("- Full : 10");
-                System.out.println("- Petite suite : 11");
-                System.out.println("- Grande suite : 12");
-                System.out.println("- Yams : 13");
-                System.out.println("- Chance : 14");
-                int choixCategorie = 0;
-                while (choixCategorie == 1) {
-                    try {
-                        choixCategorie = Integer.parseInt(System.console().readLine());
-                    }
-                    catch (NumberFormatException e) {
-                        System.out.println("Entrez un nombre valide : ");
-                    }
-                }
                 //On ajoute le score au bon endroit
-                game.scores.setScoreSheet(i, choixCategorie, game.partie.verificationCombos().get(choixCategorie).get(1));
+                game.scores.setScoreSheet(i, game.partie.verificationCombos());
                 game.scores.displayScoresheet();
                 game.partie.resetDices();
             }
