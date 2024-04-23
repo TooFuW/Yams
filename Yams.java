@@ -331,7 +331,32 @@ class Partie {
                 }
                 game.partie.displayDices();
                 //On met le score au bon endroit
-                game.scores.setScoreSheet(i, 1, 5);//Valeurs placeholder
+                System.out.println("Entrez le numéro de la catégorie dans laquelle vous voulez ajouter votre score :");
+                System.out.println("- As : 1");
+                System.out.println("- 2 : 2");
+                System.out.println("- 3 : 3");
+                System.out.println("- 4 : 4");
+                System.out.println("- 5 : 5");
+                System.out.println("- 6 : 6");
+                System.out.println("- Bonus : 7");
+                System.out.println("- Brelan : 8");
+                System.out.println("- Carre : 9");
+                System.out.println("- Full : 10");
+                System.out.println("- Petite suite : 11");
+                System.out.println("- Grande suite : 12");
+                System.out.println("- Yams : 13");
+                System.out.println("- Chance : 14");
+                int choixCategorie = 0;
+                while (choixCategorie == 1) {
+                    try {
+                        choixCategorie = Integer.parseInt(System.console().readLine());
+                    }
+                    catch (NumberFormatException e) {
+                        System.out.println("Entrez un nombre valide : ");
+                    }
+                }
+                //On ajoute le score au bon endroit
+                game.scores.setScoreSheet(i, choixCategorie, game.partie.verificationCombos().get(choixCategorie).get(1));
                 game.scores.displayScoresheet();
                 game.partie.resetDices();
             }
