@@ -135,7 +135,7 @@ class ScoreSheet {
         System.out.println("- Yams : 12");
         System.out.println("- Chance : 13");
         int choixCategorie = 0;
-        while (choixCategorie == 1) {
+        while (choixCategorie == 0) {
             try {
                 choixCategorie = Integer.parseInt(System.console().readLine());
             }
@@ -144,12 +144,30 @@ class ScoreSheet {
                 this.setScoreSheet(numJoueur, score);
             }
         }
-        if (this.scoresheet.get(numJoueur).get(choixCategorie).get(1) == null) {
-            this.scoresheet.get(numJoueur).get(choixCategorie).add(score.get(choixCategorie).get(1));
+        System.out.println(score);
+        if (this.scoresheet.get(numJoueur).get(choixCategorie - 1).get(1) == null) {
+            this.scoresheet.get(numJoueur).get(choixCategorie - 1).set(1, score.get(numJoueur).get(choixCategorie).get(1));
         }
         else {
             System.out.println("Vous avez déja un score pour cette catégorie, veuillez choisir une catégorie vide :");
             this.setScoreSheet(numJoueur, score);
+        }
+    }
+
+    public void setBonus() {
+        //On regarde pour tous les joueurs s'ils gagnent ou non le bonus
+        int total = 0;
+        for (int i = 0; i < this.scoresheet.size(); i++) {
+            for (int j = 0; j < this.scoresheet.get(i).size(); j++) {
+                total += this.scoresheet.get(i).get(j).get(1); 
+            }
+            if (total >= 63) {
+                this.scoresheet.get(i).get(6).set(1, 35);
+            }
+            else {
+                this.scoresheet.get(i).get(13).set(1, 0);
+            }
+            total = 0;
         }
     }
 
@@ -340,7 +358,8 @@ class Partie {
     public static void main(String[] args) {
         //On exécute la boucle du jeu
         Partie game = new Partie(2);
-        while (true) { //True pour l'instant, mais on mettra une vérification de si la feuille de score est remplie à la place
+        int a = 1;
+        while (a == 1) { //True pour l'instant, mais on mettra une vérification de si la feuille de score est remplie à la place
             for (int i = 0; i < game.scores.getScoreSheet().size(); i++) {
                 System.out.println("\nAu joueur " + i + " de jouer :");
                 //On lance une première fois les dés
@@ -372,5 +391,7 @@ class Partie {
                 game.partie.resetDices();
             }
         }
+        //On calcule le bonus
+        game.scores.setBonus();
     }
 }
