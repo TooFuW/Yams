@@ -331,7 +331,6 @@ class Partie {
                 }
                 game.partie.displayDices();
                 //On met le score au bon endroit
-
                 game.scores.setScoreSheet(i, 1, 5);//Valeurs placeholder
                 game.scores.displayScoresheet();
                 game.partie.resetDices();
