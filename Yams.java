@@ -31,6 +31,9 @@ public class Yams {
                 this.dices.set(i, rand.nextInt(6) + 1);
             }
         }
+        for (int i = 0; i < 5; i++) {
+            this.dices.set(i, 5);
+        }
     }
 
     public int chooseDice() {
@@ -246,7 +249,7 @@ public class Yams {
         combos.add(yams);
         combos.add(chance);
         
-        System.out.println(combos);
+        System.out.println("\n" + combos);
         return combos;
     }
 
@@ -292,12 +295,12 @@ class ScoreSheet {
 
     public void setScoreSheet(int numJoueur, ArrayList<ArrayList<Integer>> score) {
         //On met un score au bon endroit dans le ScoreSheet (se référencer à binding.txt)
-        this.displayScoresheet();
-        if (score.get(11).get(1) == 50 && this.scoresheet.get(numJoueur).get(12).get(1).equals(null)) {
-            System.out.println("YAMS !");
+        if (score.get(11).get(1) == 50 && this.scoresheet.get(numJoueur).get(12).get(1) == null) {
+            System.out.println("\nYAMS !");
             this.scoresheet.get(numJoueur).get(12).set(1, 50);
         }
         else if (score.get(11).get(1) == 50 && this.scoresheet.get(numJoueur).get(12).get(1) == 50) {
+            this.displayScoresheet();
             System.out.println("YAMS ! Vous avez déjà rempli le YAMS alors choisissez n'importe quelle autre catégorie vide pour lui donner 50 points :");
             System.out.println("- As : 1");
             System.out.println("- 2 : 2");
@@ -334,6 +337,7 @@ class ScoreSheet {
             }
         }
         else {
+            this.displayScoresheet();
             System.out.println("Choisissez la catégorie à laquelle vous voulez ajouter le score associé :");
             System.out.println("- As : 1");
             System.out.println("- 2 : 2");
