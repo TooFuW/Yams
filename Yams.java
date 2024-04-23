@@ -311,9 +311,6 @@ class ScoreSheet {
         while (choixCategorie == 0) {
             try {
                 choixCategorie = Integer.parseInt(System.console().readLine());
-                if (choixCategorie >= 7) {
-                    choixCategorie += 1;
-                }
             }
             catch (NumberFormatException e) {
                 System.out.println("Entrez un nombre valide :");
@@ -321,7 +318,12 @@ class ScoreSheet {
             }
         }
         if (this.scoresheet.get(numJoueur).get(choixCategorie - 1).get(1) == null) {
-            this.scoresheet.get(numJoueur).get(choixCategorie - 1).set(1, score.get(choixCategorie - 1).get(1));
+            if (choixCategorie >= 7) {
+                this.scoresheet.get(numJoueur).get(choixCategorie).set(1, score.get(choixCategorie - 1).get(1));
+            }
+            else {
+                this.scoresheet.get(numJoueur).get(choixCategorie - 1).set(1, score.get(choixCategorie - 1).get(0));
+            }
         }
         else {
             System.out.println("Vous avez déja un score pour cette catégorie, veuillez choisir une catégorie vide :");
