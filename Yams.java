@@ -158,7 +158,6 @@ public class Yams {
 
         ArrayList<ArrayList<Integer>> combos = new ArrayList<>();
 
-
         ArrayList<Integer> as = new ArrayList<>();
         ArrayList<Integer> deux = new ArrayList<>();
         ArrayList<Integer> trois = new ArrayList<>();
@@ -197,7 +196,6 @@ public class Yams {
         }
         else{brelan.add(0);}
 
-
         carre.add(8);
         if(this.is_more_than(this.dices, 4)){ // s'il y a plus de 3 cartes du meme type alors il y a un brelan et le score est la somme des 5 dés. sinon 0 
             carre.add(this.somme(this.dices));
@@ -209,7 +207,6 @@ public class Yams {
             full.add(25);
         }else{full.add(0);}
 
-
         ps.add(10);
         if(this.is_petite_suite(this.dices)){
             ps.add(25);
@@ -219,7 +216,6 @@ public class Yams {
         if(this.is_grande_suite(this.dices)){
             gs.add(40);
         }else{gs.add(0);}
-
 
         yams.add(12);
         if(this.is_more_than(this.dices, 5)){
@@ -243,6 +239,7 @@ public class Yams {
         combos.add(yams);
         combos.add(chance);
         
+        System.out.println(combos);
         return combos;
     }
 
