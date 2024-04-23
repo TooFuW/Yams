@@ -322,7 +322,7 @@ class ScoreSheet {
                 this.scoresheet.get(numJoueur).get(choixCategorie).set(1, score.get(choixCategorie - 1).get(1));
             }
             else {
-                this.scoresheet.get(numJoueur).get(choixCategorie - 1).set(1, score.get(choixCategorie - 1).get(0));
+                this.scoresheet.get(numJoueur).get(choixCategorie - 1).set(1, score.get(choixCategorie - 1).get(1));
             }
         }
         else {
@@ -358,6 +358,19 @@ class ScoreSheet {
             }
         }
         return true;
+    }
+
+    public ArrayList<Integer> calculScore(){
+        //On calcule le score de tous les joueurs
+        ArrayList<Integer> totalJoueurs = new ArrayList<>();
+        int total = 0;
+        for (int i = 0; i < this.scoresheet.size(); i++) {
+            for (int j = 0; j < this.scoresheet.get(i).size(); j++) {
+                total += this.scoresheet.get(i).get(j).get(1);
+            }
+            totalJoueurs.add(total);
+        }
+        return totalJoueurs;
     }
 
     public void displayScoresheet()  {
@@ -587,5 +600,6 @@ class Partie {
         game.scores.setBonus();
         System.out.println("La partie est finie, les scores sont :");
         game.scores.displayScoresheet();
+        System.out.println("Joueur 1 a un score de : " + game.scores.calculScore().get(0) + "\nJoueur 2 a un score de : " + game.scores.calculScore().get(1) + "\n");
     }
 }
