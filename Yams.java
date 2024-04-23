@@ -35,7 +35,7 @@ public class Yams {
 
     public int chooseDice() {
         //On choisir les dés à relancer
-        System.out.print("Entrez les numéros (emplacements) des dés à relancer (séparés par des espaces) : ");
+        System.out.print("Entrez les numéros (emplacements) des dés à relancer (séparés par des espaces) ou rien si vous voulez tout garder : ");
         String input = System.console().readLine();
         this.keepedDice = new ArrayList<Integer>();
         if (input.equals("")) {
