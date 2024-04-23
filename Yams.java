@@ -320,9 +320,8 @@ class ScoreSheet {
                 this.setScoreSheet(numJoueur, score);
             }
         }
-        System.out.println(score);
         if (this.scoresheet.get(numJoueur).get(choixCategorie - 1).get(1) == null) {
-            this.scoresheet.get(numJoueur).get(choixCategorie - 1).set(1, score.get(choixCategorie).get(1));
+            this.scoresheet.get(numJoueur).get(choixCategorie - 1).set(1, score.get(choixCategorie - 1).get(1));
         }
         else {
             System.out.println("Vous avez déja un score pour cette catégorie, veuillez choisir une catégorie vide :");
