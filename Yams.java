@@ -138,9 +138,7 @@ public class Yams {
 
         for(int i=0; i<liste.size()-1; i++){
             
-            if (count >= 4){
-                return true;
-            }
+            
             if(liste.get(i) == liste.get(i+1) - 1){
                 count ++;
             }
@@ -153,7 +151,9 @@ public class Yams {
                 count=1;
             }
         }
-
+        if (count >= 4){
+            return true;
+        }
         }
         return false;
 
