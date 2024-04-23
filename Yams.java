@@ -127,8 +127,6 @@ public class Yams {
             test2.add(i);
         }
 
-       
-
         return(liste.equals(test1) || liste.equals(test2));
     }
 
@@ -140,7 +138,6 @@ public class Yams {
         int count = 1;
 
         for(int i=0; i<liste.size()-1; i++){
-            
             
             if(liste.get(i) == liste.get(i+1) - 1){
                 count ++;
@@ -159,8 +156,6 @@ public class Yams {
         }
         }
         return false;
-
-
     }
 
     public ArrayList<ArrayList<Integer>> verificationCombos() {
@@ -648,6 +643,8 @@ class Partie {
         game.scores.setBonus();
         System.out.println("La partie est finie, les scores sont :");
         game.scores.displayScoresheet();
-        System.out.println("Joueur 1 a un score de : " + game.scores.calculScore().get(0) + "\nJoueur 2 a un score de : " + game.scores.calculScore().get(1) + "\n");
+        for (int i = 0; i < game.scores.getScoreSheet().size(); i++) {
+            System.out.println("Joueur " + i + " a un score de : " + game.scores.calculScore().get(i));
+        }
     }
 }
