@@ -205,6 +205,18 @@ class ScoreSheet {
         }
     }
 
+    public boolean estRemplie() {
+        //On regarde si le jeu est fini
+        for (int i = 0; i < this.scoresheet.size(); i++) {
+            for (int j = 0; j < this.scoresheet.get(i).size(); j++) {
+                if (this.scoresheet.get(i).get(j).get(1) == null) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public void displayScoresheet()  {
         //On affiche les scores de tous les joueurs
         System.out.println();
@@ -392,8 +404,7 @@ class Partie {
     public static void main(String[] args) {
         //On exécute la boucle du jeu
         Partie game = new Partie(2);
-        int a = 1;
-        while (a == 1) { //True pour l'instant, mais on mettra une vérification de si la feuille de score est remplie à la place
+        while (!game.scores.estRemplie()) {
             for (int i = 0; i < game.scores.getScoreSheet().size(); i++) {
                 System.out.println("\nAu joueur " + i + " de jouer :");
                 //On lance une première fois les dés
@@ -427,5 +438,7 @@ class Partie {
         }
         //On calcule le bonus
         game.scores.setBonus();
+        System.out.println("La partie est finie, les scores sont :");
+        game.scores.displayScoresheet();
     }
 }
