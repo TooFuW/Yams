@@ -65,9 +65,43 @@ public class Yams {
         return count;
     }
 
+    public int somme(ArrayList<Integer> liste){
+        int sum = 0;
+        for(int i=0; i<liste.size();i++){
+            sum += liste.get(i);
+        }
+        return sum;
+    }
+
     public ArrayList<ArrayList<Integer>> verificationCombos() {
-        ArrayList<ArrayList<Integer>> combos = new ArrayList<>();
         //On cherche les combinaisons de score possibles par rapport aux dés actuels
+
+        ArrayList<ArrayList<Integer>> combos = new ArrayList<>();
+
+
+        ArrayList<Integer> as = new ArrayList<>();
+        ArrayList<Integer> deux = new ArrayList<>();
+        ArrayList<Integer> trois = new ArrayList<>();
+        ArrayList<Integer> quatre = new ArrayList<>();
+        ArrayList<Integer> cinq = new ArrayList<>();
+        ArrayList<Integer> six = new ArrayList<>();
+        ArrayList<Integer> brelan = new ArrayList<>();
+        ArrayList<Integer> carre = new ArrayList<>();
+        ArrayList<Integer> full = new ArrayList<>();
+        ArrayList<Integer> ps = new ArrayList<>();
+        ArrayList<Integer> gs = new ArrayList<>();
+        ArrayList<Integer> yams = new ArrayList<>();
+        ArrayList<Integer> chance = new ArrayList<>();
+
+        as.add(1);
+        as.add(this.count(this.dices, 1));
+
+        deux.add(2);
+        deux.add(2*this.count(this.dices, 2));
+
+        trois.add(3);
+        deux.add(3*this.count(this.dices, 3));
+        
 
 
 
