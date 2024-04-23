@@ -65,12 +65,92 @@ public class Yams {
         return count;
     }
 
+    public boolean is_more_than(ArrayList<Integer> liste, int iterations){
+        int count=0;
+        for(int i=1; i<=6; i++){
+            count = this.count(this.dices, i);
+            if (count>=iterations){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int somme(ArrayList<Integer> liste){
         int sum = 0;
         for(int i=0; i<liste.size();i++){
             sum += liste.get(i);
         }
         return sum;
+    }
+
+    public boolean is_full(ArrayList<Integer> liste){
+        boolean is_brelan = false;
+        boolean is_pair = false;
+        int deja_fait = 7;
+
+        int count=0;
+        for(int i=1; i<=6; i++){
+            count = this.count(this.dices, i);
+            if (count>=3){
+                is_brelan = true;
+                deja_fait=i;
+            }
+        }
+
+        for(int i=1; i<=6; i++){
+            count = this.count(this.dices, i);
+            if (count>=2 && i!=deja_fait) {
+                is_pair= true;
+                
+            }
+        }
+
+        return is_brelan && is_pair;
+    }
+
+    public boolean is_grande_suite(ArrayList<Integer> liste){
+        liste.sort(null);
+        ArrayList<Integer> test1 = new ArrayList<>();
+        ArrayList<Integer> test2 = new ArrayList<>();
+
+        for(int i=1; i<=5;i++){
+            test1.add(i);
+        }
+
+        for(int i=2; i<=6;i++){
+            test1.add(i);
+        }
+
+        return(liste.equals(test1) || liste.equals(test2));
+    }
+
+
+    public boolean is_petite_suite(ArrayList<Integer> liste){
+        liste.sort(null);
+        int count = 1;
+
+        for(int i=0; i<liste.size()-1; i++){
+            if (count >= 4){
+                return true;
+            }
+            if(liste.get(i) == liste.get(i+1) + 1){
+                count ++;
+            }
+            else{
+
+                if(liste.get(i) == liste.get(i+1)){
+                ;
+            }
+            else{
+                count=1;
+            }
+        }
+
+        }
+        return false;
+
+
     }
 
     public ArrayList<ArrayList<Integer>> verificationCombos() {
@@ -100,13 +180,69 @@ public class Yams {
         deux.add(2*this.count(this.dices, 2));
 
         trois.add(3);
-        deux.add(3*this.count(this.dices, 3));
+        trois.add(3*this.count(this.dices, 3));
+
+        quatre.add(4);
+        quatre.add(4*this.count(this.dices, 4));
+
+        cinq.add(5);
+        cinq.add(5*this.count(this.dices, 5));
         
+        six.add(6);
+        six.add(6*this.count(this.dices, 6));
+
+        brelan.add(7);
+        if(this.is_more_than(this.dices, 3)){ // s'il y a plus de 3 cartes du meme type alors il y a un brelan et le score est la somme des 5 dés. sinon 0 
+            brelan.add(this.somme(this.dices));
+        }
+        else{brelan.add(0);}
 
 
+        carre.add(8);
+        if(this.is_more_than(this.dices, 4)){ // s'il y a plus de 3 cartes du meme type alors il y a un brelan et le score est la somme des 5 dés. sinon 0 
+            carre.add(this.somme(this.dices));
+        }
+        else{carre.add(0);}
+
+        full.add(9);
+        if(is_full(this.dices)){
+            full.add(25);
+        }else{full.add(0);}
 
 
+        ps.add(10);
+        if(this.is_petite_suite(this.dices)){
+            ps.add(25);
+        }else{ps.add(0);}
 
+        gs.add(11);
+        if(this.is_grande_suite(this.dices)){
+            gs.add(40);
+        }else{gs.add(0);}
+
+
+        yams.add(12);
+        if(this.is_more_than(this.dices, 5)){
+            yams.add(50);
+        }else{yams.add(0);}
+
+        chance.add(13);
+        chance.add(this.somme(this.dices));
+
+        combos.add(as);
+        combos.add(deux);
+        combos.add(trois);
+        combos.add(quatre);
+        combos.add(cinq);
+        combos.add(six);
+        combos.add(brelan);
+        combos.add(carre);
+        combos.add(full);
+        combos.add(ps);
+        combos.add(gs);
+        combos.add(yams);
+        combos.add(chance);
+        
         return combos;
     }
 
