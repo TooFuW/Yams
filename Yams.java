@@ -110,7 +110,9 @@ public class Yams {
     }
 
     public boolean is_grande_suite(ArrayList<Integer> liste){
+        
         liste.sort(null);
+       
         ArrayList<Integer> test1 = new ArrayList<>();
         ArrayList<Integer> test2 = new ArrayList<>();
 
@@ -119,22 +121,27 @@ public class Yams {
         }
 
         for(int i=2; i<=6;i++){
-            test1.add(i);
+            test2.add(i);
         }
+
+       
 
         return(liste.equals(test1) || liste.equals(test2));
     }
 
 
     public boolean is_petite_suite(ArrayList<Integer> liste){
+        
         liste.sort(null);
+        
         int count = 1;
 
         for(int i=0; i<liste.size()-1; i++){
+            
             if (count >= 4){
                 return true;
             }
-            if(liste.get(i) == liste.get(i+1) + 1){
+            if(liste.get(i) == liste.get(i+1) - 1){
                 count ++;
             }
             else{
@@ -538,7 +545,9 @@ class Partie {
 
     public static void main(String[] args) {
         //On exécute la boucle du jeu
+        
         Partie game = new Partie(2);
+        
         while (!game.scores.estRemplie()) {
             for (int i = 0; i < game.scores.getScoreSheet().size(); i++) {
                 System.out.println("\nAu joueur " + i + " de jouer :");
