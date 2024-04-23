@@ -293,41 +293,81 @@ class ScoreSheet {
     public void setScoreSheet(int numJoueur, ArrayList<ArrayList<Integer>> score) {
         //On met un score au bon endroit dans le ScoreSheet (se référencer à binding.txt)
         this.displayScoresheet();
-        System.out.println("\nEntrez le numéro d'une catégorie vide dans laquelle vous voulez écrire votre score :");
-        System.out.println("- As : 1");
-        System.out.println("- 2 : 2");
-        System.out.println("- 3 : 3");
-        System.out.println("- 4 : 4");
-        System.out.println("- 5 : 5");
-        System.out.println("- 6 : 6");
-        System.out.println("- Brelan : 7");
-        System.out.println("- Carre : 8");
-        System.out.println("- Full : 9");
-        System.out.println("- Petite suite : 10");
-        System.out.println("- Grande suite : 11");
-        System.out.println("- Yams : 12");
-        System.out.println("- Chance : 13");
-        int choixCategorie = 0;
-        while (choixCategorie == 0) {
-            try {
-                choixCategorie = Integer.parseInt(System.console().readLine());
+        if (score.get(11).get(1) == 50 && this.scoresheet.get(numJoueur).get(12).get(1).equals(null)) {
+            System.out.println("YAMS !");
+            this.scoresheet.get(numJoueur).get(12).set(1, 50);
+        }
+        else if (score.get(11).get(1) == 50 && this.scoresheet.get(numJoueur).get(12).get(1) == 50) {
+            System.out.println("YAMS ! Vous avez déjà rempli le YAMS alors choisissez n'importe quelle autre catégorie vide pour lui donner 50 points :");
+            System.out.println("- As : 1");
+            System.out.println("- 2 : 2");
+            System.out.println("- 3 : 3");
+            System.out.println("- 4 : 4");
+            System.out.println("- 5 : 5");
+            System.out.println("- 6 : 6");
+            System.out.println("- Brelan : 7");
+            System.out.println("- Carre : 8");
+            System.out.println("- Full : 9");
+            System.out.println("- Petite suite : 10");
+            System.out.println("- Grande suite : 11");
+            System.out.println("- Yams : 12");
+            System.out.println("- Chance : 13");
+            int choixCategorie = 0;
+            while (choixCategorie == 0) {
+                try {
+                    choixCategorie = Integer.parseInt(System.console().readLine());
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("Entrez un nombre valide :");
+                    this.setScoreSheet(numJoueur, score);
+                }
             }
-            catch (NumberFormatException e) {
-                System.out.println("Entrez un nombre valide :");
+            if (choixCategorie >= 7 && this.scoresheet.get(numJoueur).get(choixCategorie).get(1) == null) {
+                this.scoresheet.get(numJoueur).get(choixCategorie).set(1, 50);
+            }
+            else if (choixCategorie < 7 && this.scoresheet.get(numJoueur).get(choixCategorie - 1).get(1) == null) {
+                    this.scoresheet.get(numJoueur).get(choixCategorie - 1).set(1, 50);
+            }
+            else {
+                System.out.println("Vous avez déja un score pour cette catégorie, veuillez choisir une catégorie vide :");
                 this.setScoreSheet(numJoueur, score);
             }
         }
-        if (this.scoresheet.get(numJoueur).get(choixCategorie - 1).get(1) == null) {
-            if (choixCategorie >= 7) {
+        else {
+            System.out.println("Choisissez la catégorie à laquelle vous voulez ajouter le score associé :");
+            System.out.println("- As : 1");
+            System.out.println("- 2 : 2");
+            System.out.println("- 3 : 3");
+            System.out.println("- 4 : 4");
+            System.out.println("- 5 : 5");
+            System.out.println("- 6 : 6");
+            System.out.println("- Brelan : 7");
+            System.out.println("- Carre : 8");
+            System.out.println("- Full : 9");
+            System.out.println("- Petite suite : 10");
+            System.out.println("- Grande suite : 11");
+            System.out.println("- Yams : 12");
+            System.out.println("- Chance : 13");
+            int choixCategorie = 0;
+            while (choixCategorie == 0) {
+                try {
+                    choixCategorie = Integer.parseInt(System.console().readLine());
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("Entrez un nombre valide :");
+                    this.setScoreSheet(numJoueur, score);
+                }
+            }
+            if (choixCategorie >= 7 && this.scoresheet.get(numJoueur).get(choixCategorie).get(1) == null) {
                 this.scoresheet.get(numJoueur).get(choixCategorie).set(1, score.get(choixCategorie - 1).get(1));
             }
-            else {
-                this.scoresheet.get(numJoueur).get(choixCategorie - 1).set(1, score.get(choixCategorie - 1).get(1));
+            else if (choixCategorie < 7 && this.scoresheet.get(numJoueur).get(choixCategorie - 1).get(1) == null) {
+                    this.scoresheet.get(numJoueur).get(choixCategorie - 1).set(1, score.get(choixCategorie - 1).get(1));
             }
-        }
-        else {
-            System.out.println("Vous avez déja un score pour cette catégorie, veuillez choisir une catégorie vide :");
-            this.setScoreSheet(numJoueur, score);
+            else {
+                System.out.println("Vous avez déja un score pour cette catégorie, veuillez choisir une catégorie vide :");
+                this.setScoreSheet(numJoueur, score);
+            }
         }
     }
 
@@ -366,9 +406,12 @@ class ScoreSheet {
         int total = 0;
         for (int i = 0; i < this.scoresheet.size(); i++) {
             for (int j = 0; j < this.scoresheet.get(i).size(); j++) {
-                total += this.scoresheet.get(i).get(j).get(1);
+                if (this.scoresheet.get(i).get(j).get(1) != null) {
+                    total += this.scoresheet.get(i).get(j).get(1);
+                }
             }
             totalJoueurs.add(total);
+            total = 0;
         }
         return totalJoueurs;
     }
@@ -541,7 +584,8 @@ class ScoreSheet {
                         break;
                 }
             }
-        System.out.println(temp);
+        System.out.print(temp);
+        System.out.println(" Score total : " + this.calculScore().get(i));
         }
     }
 }
