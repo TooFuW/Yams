@@ -55,8 +55,25 @@ public class Yams {
         return 1;
     }
 
-    public void verificationCombos() {
+    public int count(ArrayList<Integer> liste, int elem ){
+        int count = 0;
+        for(int i=0; i<liste.size(); i++){
+            if(liste.get(i) == elem){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public ArrayList<ArrayList<Integer>> verificationCombos() {
+        ArrayList<ArrayList<Integer>> combos = new ArrayList<>();
         //On cherche les combinaisons de score possibles par rapport aux dés actuels
+
+
+
+
+
+        return combos;
     }
 
     public void resetDices() {
