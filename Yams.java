@@ -35,7 +35,7 @@ public class Yams {
 
     public int chooseDice() {
         //On choisir les dés à relancer
-        System.out.print("Entrez les numéros (emplacements) des dés à relancer (séparés par des espaces) ou rien si vous voulez tout garder : ");
+        System.out.print("Entrez les emplacements des dés à relancer (séparés par des espaces) ou rien si vous voulez tout garder : ");
         String input = System.console().readLine();
         this.keepedDice = new ArrayList<Integer>();
         if (input.equals("")) {
@@ -143,7 +143,6 @@ class ScoreSheet {
                 this.scoresheet.get(i).get(j).add(null);
             }
         }
-        this.displayScoresheet();
     }
 
     public ArrayList<ArrayList<ArrayList<Integer>>> getScoreSheet() {
@@ -154,7 +153,7 @@ class ScoreSheet {
     public void setScoreSheet(int numJoueur, ArrayList<ArrayList<Integer>> score) {
         //On met un score au bon endroit dans le ScoreSheet (se référencer à binding.txt)
         this.displayScoresheet();
-        System.out.println("\nEntrez le numéro de la catégorie dans laquelle vous voulez ajouter votre score :");
+        System.out.println("\nEntrez le numéro d'une catégorie vide dans laquelle vous voulez écrire votre score :");
         System.out.println("- As : 1");
         System.out.println("- 2 : 2");
         System.out.println("- 3 : 3");
@@ -172,6 +171,9 @@ class ScoreSheet {
         while (choixCategorie == 0) {
             try {
                 choixCategorie = Integer.parseInt(System.console().readLine());
+                if (choixCategorie >= 7) {
+                    choixCategorie += 1;
+                }
             }
             catch (NumberFormatException e) {
                 System.out.println("Entrez un nombre valide :");
@@ -180,7 +182,7 @@ class ScoreSheet {
         }
         System.out.println(score);
         if (this.scoresheet.get(numJoueur).get(choixCategorie - 1).get(1) == null) {
-            this.scoresheet.get(numJoueur).get(choixCategorie - 1).set(1, score.get(numJoueur).get(choixCategorie).get(1));
+            this.scoresheet.get(numJoueur).get(choixCategorie - 1).set(1, score.get(choixCategorie).get(1));
         }
         else {
             System.out.println("Vous avez déja un score pour cette catégorie, veuillez choisir une catégorie vide :");
@@ -414,6 +416,7 @@ class Partie {
                 int choixJoueur = game.partie.chooseDice();
                 //Si le joueur rentre un input invalide on redemande
                 while (choixJoueur == 0) {
+                    System.out.println("L'entrée est invalide, veuillez entrer les emplacements des dés que vous souhaitez relancer ou aucun si vous ne voulez pas relancer");
                     choixJoueur = game.partie.chooseDice();
                 }
                 //S'il ne rentre rien on ne relance pas les dés et on fini le tour
@@ -425,6 +428,7 @@ class Partie {
                     game.partie.rollDices();
                     game.partie.displayDices();
                     while (game.partie.chooseDice() == 0) {
+                        System.out.println("L'entrée est invalide, veuillez entrer les emplacements des dés que vous souhaitez relancer ou aucun si vous ne voulez pas relancer");
                         game.partie.chooseDice();
                     }
                     game.partie.rollDices();
