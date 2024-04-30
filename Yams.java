@@ -31,9 +31,6 @@ public class Yams {
                 this.dices.set(i, rand.nextInt(6) + 1);
             }
         }
-        for (int i = 0; i < 5; i++) {
-            this.dices.set(i, 5);
-        }
     }
 
     public int chooseDice() {
