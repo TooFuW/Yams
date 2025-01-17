@@ -1,3 +1,5 @@
-# Jeu du Yams en java
+# Yams game in Java
 
-Jeu du Yams en java qui se joue dans le terminal
+Yams game in Java that is played in the terminal
+
+Code in French
